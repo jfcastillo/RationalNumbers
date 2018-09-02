@@ -19,18 +19,58 @@ public class RationalNumber<T extends Number> implements IRationalNumber<Rationa
 		this.denominator = denominator;
 	}
 
+	public void addition () {
+		
+	}
 
 	@Override
 	public void addRational(RationalNumber<Number> rationalToBeAdded) {
 		// TODO Auto-generated method stub
+		T number1 = multiply(numerator, (T)rationalToBeAdded.getDenominator());
+		T number2 = multiply(denominator, (T)rationalToBeAdded.getNumerator());
 		
+		numerator = addition(number1, number2);
+		denominator = multiply(denominator, (T) rationalToBeAdded.getDenominator());
+	}
+	
+	public T addition (T n1, T n2) {
+		T number = null;
+		if (n1 instanceof Long || n2 instanceof Long) {
+			number = (T) Long.valueOf(n1.longValue()+n2.longValue());
+		}
+		else if (n1 instanceof Integer || n2 instanceof Integer) {			
+			number = (T) Integer.valueOf(n1.intValue()+n2.intValue());
+		}
+		else if (n1 instanceof Short || n2 instanceof Short) {
+			number = (T) Short.valueOf((short) (n1.shortValue()+n2.shortValue()));
+		}
+		return number;
 	}
 
 
 	@Override
 	public void substractRational(RationalNumber<Number> rationalToBeSubstracted) {
 		// TODO Auto-generated method stub
+		T number1 = multiply(numerator, (T)rationalToBeSubstracted.getDenominator());
+		T number2 = multiply(denominator, (T)rationalToBeSubstracted.getNumerator());
 		
+		numerator = subtraction(number1, number2);
+		denominator = multiply(denominator, (T) rationalToBeSubstracted.getDenominator());
+		
+	}
+	
+	public T subtraction (T n1, T n2) {
+		T number = null;
+		if (n1 instanceof Long || n2 instanceof Long) {
+			number = (T) Long.valueOf(n1.longValue() - n2.longValue());
+		}
+		else if (n1 instanceof Integer || n2 instanceof Integer) {			
+			number = (T) Integer.valueOf(n1.intValue() - n2.intValue());
+		}
+		else if (n1 instanceof Short || n2 instanceof Short) {
+			number = (T) Short.valueOf((short) (n1.shortValue() - n2.shortValue()));
+		}
+		return number;
 	}
 
 
@@ -39,10 +79,10 @@ public class RationalNumber<T extends Number> implements IRationalNumber<Rationa
 		// TODO Auto-generated method stub
 		numerator = multiply(numerator, (T) rationalFactor.getNumerator());
 		denominator = multiply(denominator, (T) rationalFactor.getDenominator());
+		simplifyRational();
 		
 	}
-
-
+	
 	private T multiply(T n1, T n2) {
 		T number = null;
 		if (n1 instanceof Long || n2 instanceof Long) {
@@ -58,6 +98,14 @@ public class RationalNumber<T extends Number> implements IRationalNumber<Rationa
 		
 	}
 
+	@Override
+	public void divideRational(RationalNumber<Number> rationalQuocient) {
+		numerator = multiply(numerator, (T) rationalQuocient.getDenominator());
+		denominator = multiply(denominator, (T) rationalQuocient.getNumerator());
+		simplifyRational();
+		
+	}
+	
 //	public T mcd(T n1, T n2) {
 //		boolean t = false;
 //		T r = null;
@@ -81,11 +129,7 @@ public class RationalNumber<T extends Number> implements IRationalNumber<Rationa
 //
 //	}
 
-	@Override
-	public void divideRational(RationalNumber<Number> rationalQuocient) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 
 	@Override
@@ -97,14 +141,15 @@ public class RationalNumber<T extends Number> implements IRationalNumber<Rationa
 
 	@Override
 	public void rationalInverse() {
-		// TODO Auto-generated method stub
-		
+		T change = numerator;
+		numerator = denominator;
+		denominator = change;
 	}
 
 
 	@Override
 	public void squaredRational() {
-		// TODO Auto-generated method stub
+//		numerator = (T)(Math.pow(numerator, 2));
 		
 	}
 
