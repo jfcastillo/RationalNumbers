@@ -1,27 +1,32 @@
 package view;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import numericSystem.IRationalNumber;
 import numericSystem.RationalNumber;
 
-public class Main {
+public class Main extends Application{
 
 	public Main() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public static void main(String[] args) {
-		Main m = new Main();
-		RationalNumber<Number> a = new RationalNumber<Number>(1, 2);		
-		RationalNumber<Number> b = new RationalNumber<Number>(6, 4);
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		Parent root = FXMLLoader.load(getClass().getResource("/view/calculatorView.fxml"));
+		Scene scene = new Scene(root);
 		
-		a.multiplyRational(b);
-		System.out.println(a.getNumerator());
-		System.out.println(a.getDenominator());
-//		b.multiplyRational(new RationalNumber<Number>(0, 1));
-//		boolean prueba = true;
-//		prueba = prueba && (a.getNumerator().intValue() == 3 && a.getDenominator().intValue() == 4);
-//		prueba = prueba && (b.getNumerator().intValue() == 0);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+	}
 
+	public static void main(String[] args) {
+		launch(args);
+		
 	}
 
 }
