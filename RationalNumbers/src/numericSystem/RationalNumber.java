@@ -169,8 +169,25 @@ public class RationalNumber<T extends Number> implements IRationalNumber<Rationa
 	@Override
 	public void rationalInverse() {
 		T change = numerator;
-		numerator = denominator;
-		denominator = change;
+		if (numerator instanceof Integer) {
+			if (numerator.intValue() != 0) {
+				numerator = denominator;
+				denominator = change;
+			}
+		}
+		else if (numerator instanceof Long) {
+			if (numerator.longValue() != 0) {
+				numerator = denominator;
+				denominator = change;
+			}
+		}
+		else if (numerator instanceof Short) {
+			if (numerator.shortValue() != 0) {
+				numerator = denominator;
+				denominator = change;
+			}
+		}
+		simplifyRational();
 	}
 
 
