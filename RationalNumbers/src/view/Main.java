@@ -25,7 +25,17 @@ public class Main extends Application{
 	}
 
 	public static void main(String[] args) {
+		RationalNumber<Number> a = new RationalNumber<Number>(1, 2);
+		RationalNumber<Number> b = new RationalNumber<Number>(6, 4);
+//		a.addRational(b);
+		a.squaredRational();
+		b.squaredRational();
+		System.out.println(a.getNumerator());
+		System.out.println(a.getDenominator());
+		System.out.println(b.getNumerator());
+		System.out.println(b.getDenominator());
 		launch(args);
+		
 		
 	}
 

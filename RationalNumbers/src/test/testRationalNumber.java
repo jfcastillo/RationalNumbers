@@ -1,8 +1,9 @@
 package test;
 
 import java.util.ArrayList;
-import numericSystem.*;
+
 import junit.framework.TestCase;
+import numericSystem.RationalNumber;
 
 public class testRationalNumber extends TestCase {
 	RationalNumber<Number> a;

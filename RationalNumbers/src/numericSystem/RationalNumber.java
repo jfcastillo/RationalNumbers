@@ -31,6 +31,7 @@ public class RationalNumber<T extends Number> implements IRationalNumber<Rationa
 		
 		numerator = addition(number1, number2);
 		denominator = multiply(denominator, (T) rationalToBeAdded.getDenominator());
+		simplifyRational();
 	}
 	
 	public T addition (T n1, T n2) {
@@ -56,6 +57,7 @@ public class RationalNumber<T extends Number> implements IRationalNumber<Rationa
 		
 		numerator = subtraction(number1, number2);
 		denominator = multiply(denominator, (T) rationalToBeSubstracted.getDenominator());
+		simplifyRational();
 		
 	}
 	
@@ -105,29 +107,51 @@ public class RationalNumber<T extends Number> implements IRationalNumber<Rationa
 		simplifyRational();
 		
 	}
+	public T divide(T n1, T n2) {
+		T number = null;
+		if (n1 instanceof Long || n2 instanceof Long) {
+			number = (T) Long.valueOf(n1.longValue()/Math.abs(n2.longValue()));
+		}
+		else if (n1 instanceof Integer || n2 instanceof Integer) {			
+			number = (T) Integer.valueOf(n1.intValue()/Math.abs(n2.intValue()));
+		}
+		else if (n1 instanceof Short || n2 instanceof Short) {
+			number = (T) Short.valueOf((short) (n1.shortValue()/Math.abs(n2.shortValue())));
+		}
+		return number;
+	}
 	
-//	public T mcd(T n1, T n2) {
-//		boolean t = false;
-//		T r = null;
-//		
-//		r = ((T) Long.valueOf(n1.longValue() % n2.longValue())) != (Integer.valueOf(0));
-//		if (n1 instanceof Long || n2 instanceof Long) {
-//			while (() != 0) {
-//			       r = n1 % n2;
-//			       n1 = n2;
-//			       n2 = n2;
-//			     }
-//		}
-//		else if (n1 instanceof Integer || n2 instanceof Integer) {			
-//		
-//		}
-//		else if (n1 instanceof Short || n2 instanceof Short) {
-//		
-//		}
-//	     
-//	     return n1;
-//
-//	}
+	public T mcd(T n1, T n2) {
+		boolean t = false;
+		T r = null;
+		
+		
+		if (n1 instanceof Long || n2 instanceof Long) {
+			while (n2.longValue() != 0) {
+				r = (T) Long.valueOf(n1.longValue()%n2.longValue());
+				n1 = n2;
+				n2 = r;	       
+			}
+		}
+		else if (n1 instanceof Integer || n2 instanceof Integer) {			
+			while (n2.intValue() != 0) {
+				r = (T) Integer.valueOf(n1.intValue()%n2.intValue());
+				n1 = n2;
+				n2 = r;	       
+			}
+		}
+		else if (n1 instanceof Short || n2 instanceof Short) {
+			while (n2.shortValue() != 0) {
+				r = (T) Short.valueOf((short) (n1.shortValue()%n2.shortValue()));
+				n1 = n2;
+				n2 = r;	       
+			}			
+		}
+		
+	     
+	     return n1;
+
+	}
 
 	
 
@@ -135,6 +159,9 @@ public class RationalNumber<T extends Number> implements IRationalNumber<Rationa
 	@Override
 	public void simplifyRational() {
 		// TODO Auto-generated method stub
+		T mcd = mcd(numerator, denominator);
+		numerator = divide(numerator, mcd);
+		denominator = divide(denominator, mcd);
 		
 	}
 
@@ -149,7 +176,9 @@ public class RationalNumber<T extends Number> implements IRationalNumber<Rationa
 
 	@Override
 	public void squaredRational() {
-//		numerator = (T)(Math.pow(numerator, 2));
+		numerator = multiply(numerator, numerator);
+		denominator = multiply(denominator, denominator);
+		simplifyRational();
 		
 	}
 
